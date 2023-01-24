@@ -1,4 +1,4 @@
-# CREDIT: thepancake1 and MizoreYukii 
+# CREDIT: thepancake1 and MizoreYukii
 # LINK: https://discord.com/channels/605863047654801428/628038777134383119/804415802798768181
 
 import glob
@@ -16,7 +16,7 @@ from sims4.tuning.module_tuning import _ParseHandler, _EarlyExit
 from sims4.tuning.serialization import ETreeTuningLoader, ETreeClassCreator, _find_tunables_gen, LOAD_MODULE_FOR_EXPORTING, _scan_module_rec
 from sims4.tuning.tunable_base import LoadingTags
 from sims4.utils import strformatter
-from settings import hotreload_folder
+from constants import HOT_RELOAD
 
 logger = sims4.log.Logger('XML Reloader', default_owner='thepancake1')
 reload_keys = {"interaction" : [sims4.resources.Key(0xE882D22F, 0x0000000000006A25, 0x00000000)]}
@@ -36,7 +36,7 @@ def tuning_reload(_connection=None):
         else:
             sims4.commands.output('Reloaded: {}'.format(os.path.basename(file_name)), _connection)
             dependents.update(new_dependents)
-    
+
     for manager in get_managers().values():
         manager_name = manager.TYPE.name.lower()
         if manager_name in reload_keys:

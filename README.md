@@ -2,6 +2,14 @@
 
 # ts4-modding-workspace
 
+This is a fork of https://github.com/azigler/ts4-modding-workspace.
+
+it started out with trying to adapt the original code base to use more
+python standard best practices. Which included things like;
+
+ - pylint
+ - python based CLI with proper 
+
 > :hammer_and_wrench: Scripting workspace for modding The Sims 4
 
 ## Features

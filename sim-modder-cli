@@ -1,0 +1,62 @@
+#!/usr/bin/env python3.7
+
+"""
+sim-modder-cli
+
+CLI (command line interface) input for compile and decompile of the Sims 4 mods.
+
+
+
+"""
+import os, sys
+from argparse import ArgumentParser
+
+sys.path.append(os.path.join(os.path.dirname(__file__)))
+
+from sim_modder.constants import *
+from sim_modder.compile import compile
+
+VALID_COMMANDS = {
+    'compile': compile,
+}
+
+
+def setup_parser():
+    """
+    handles argparse setup and returns the parser object.
+    """
+    parser = ArgumentParser(
+        prog = 'simmodder',
+        description = ('CLI (command line interface) input for compile and '
+                       'decompile of the Sims 4 mods.'),
+        epilog = 'Contribute at: https://github.com/dlenwell/sim-modder'
+    )
+
+    parser.add_argument('sub_command')  # first positional argument
+    parser.add_argument('module')  # second positional argument
+    parser.add_argument('-c', '--clean')
+    parser.add_argument('-v', '--verbose', action='store_true')
+
+    return parser
+
+
+def main():
+    """
+    Triggered only if script is called from the command line directly. Never if
+    imported.
+    """
+    parser = setup_parser()
+    input = parser.parse_args()
+
+    if input.sub_command in VALID_COMMANDS.keys():
+        VALID_COMMANDS.get(input.sub_command)(input)
+
+    else:
+        print('ERROR: %s is not a valid command'%(input.sub_command))
+        print('')
+        parser.print_help()
+
+
+
+if __name__ == "__main__":
+    main()
